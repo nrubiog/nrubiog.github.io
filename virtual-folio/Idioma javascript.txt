@@ -1,0 +1,896 @@
+// script.js
+
+// Variable para rastrear el idioma actual
+let currentLanguage = 'en'; // Predeterminado a inglés
+
+// Función para cambiar de idioma
+function changeLanguage() {
+  // Cambia el idioma actual
+  currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+
+  // Actualiza el texto del botón según el idioma
+  const languageBtn = document.getElementById('changeLanguageBtn');
+  languageBtn.textContent = currentLanguage === 'en' ? 'En' : 'Es';
+
+  // Actualiza el contenido del encabezado según el idioma
+  const headerText = document.querySelector('h1');
+  if (currentLanguage === 'en') {
+    headerText.textContent = 'Welcome';
+  } else {
+    headerText.textContent = 'Bienvenido';
+  }
+
+  // Lógica adicional para cambiar otras partes de la página según el idioma
+  updatePageLanguage();
+
+  // Muestra un mensaje en la consola para verificar que la función se ejecuta
+  console.log("Cambiando de idioma...");
+}
+
+// Función para actualizar otras partes de la página según el idioma
+function updatePageLanguage() {
+
+    // Define el contenido del navbar para ambos idiomas
+    const navbarContent = {
+        en: {
+        brand: 'V-Folio',
+        home: 'Home',
+        about: 'About',
+        portfolio: 'Portfolio',
+        blog: 'Blog',
+        contact: 'Contact',
+        languageBtn: 'En',
+        },
+        es: {
+        brand: 'V-Folio',
+        home: 'Inicio',
+        about: 'Acerca',
+        portfolio: 'Portafolio',
+        blog: 'Blog',
+        contact: 'Contacto',
+        languageBtn: 'Es',
+        },
+    };
+
+    // Cambia el contenido del navbar según el idioma actual
+    const currentNavbarContent = navbarContent[currentLanguage];
+    
+    // Cambia el texto del navbar brand
+    document.querySelector('.navbar-brand').textContent = currentNavbarContent.brand;
+
+    // Cambia el texto de los elementos de la lista de navegación
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    navLinks[0].textContent = currentNavbarContent.home;
+    navLinks[1].textContent = currentNavbarContent.about;
+    navLinks[2].textContent = currentNavbarContent.portfolio;
+    navLinks[3].textContent = currentNavbarContent.blog;
+    navLinks[4].textContent = currentNavbarContent.contact;
+    
+    const sectionContent = {
+        en: {
+          welcome: 'Welcome',
+          captionHeader: 'I\'m <b class="fg-theme">Nicolás</b> Rubio',
+          designerBadge: 'Data Analyst',
+          downloadCVBtn: 'Download CV',
+          skillsHeader: 'My Skills',
+          codingSkills: 'Coding skills',
+          javascript: 'JavaScript',
+          php: 'PHP',
+          htmlCss: 'HTML + CSS',
+          python: 'Python',
+        },
+        es: {
+          welcome: 'Bienvenido',
+          captionHeader: 'Soy <b class="fg-theme">Nicolás</b> Rubio',
+          designerBadge: 'Analista de Datos',
+          downloadCVBtn: 'Descargar CV',
+          skillsHeader: 'Mis Habilidades',
+          codingSkills: 'Habilidades de Codificación',
+          javascript: 'JavaScript',
+          php: 'PHP',
+          htmlCss: 'HTML + CSS',
+          python: 'Python',
+        },
+      };
+      
+      // Cambia el contenido de la sección "Caption header"
+      document.querySelector('.caption-header h5').innerHTML = sectionContent[currentLanguage].welcome;
+      document.querySelector('.caption-header h1').innerHTML = sectionContent[currentLanguage].captionHeader;
+      document.querySelector('.caption-header .badge').textContent = sectionContent[currentLanguage].designerBadge;
+      
+      // Cambia el contenido de la sección "My Skills"
+      document.querySelector('.container.py-5 h1').textContent = sectionContent[currentLanguage].skillsHeader;
+      document.querySelectorAll('.progress-wrapper .caption')[0].textContent = sectionContent[currentLanguage].javascript;
+      document.querySelectorAll('.progress-wrapper .caption')[1].textContent = sectionContent[currentLanguage].php;
+      document.querySelectorAll('.progress-wrapper .caption')[2].textContent = sectionContent[currentLanguage].htmlCss;
+      document.querySelectorAll('.progress-wrapper .caption')[3].textContent = sectionContent[currentLanguage].python;
+      document.querySelector('.btn.btn-theme-outline').textContent = sectionContent[currentLanguage].downloadCVBtn;
+
+      const Education_Content = {
+        en: {
+          educationHeader: 'Education',
+          experienceHeader: 'Experience',
+          specializeCourse: 'Specialize of course',
+          university: 'University of Study',
+          loremIpsum: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered',
+        },
+        es: {
+          educationHeader: 'Educación',
+          experienceHeader: 'Experiencia',
+          specializeCourse: 'Especialización del curso',
+          university: 'Universidad de Estudio',
+          loremIpsum: 'Hay muchas variaciones de pasajes de Lorem Ipsum disponibles, pero la mayoría han sufrido alteraciones',
+        },
+      };
+
+      const aboutContent = {
+        en: {
+            name: 'Nicolás Rubio García',
+            role: 'Data Analyst',
+            description: 'I am a Political Science and Economics student, Data Analyst, and passionate about web programming. I am awaiting my degree in Political Science, with my eyes set on the next stage of my career: a master\'s degree in Data Science 🎓. Currently, I am immersed in a Data Science and Artificial Intelligence Bootcamp. My objective is to comprehend the world through meticulous data analysis and interpretations, developing impactful solutions by integrating politics, economics, and technology. 🌐📊🤖',
+            livesIn: 'Caldas, Colombia',
+            age: '22 Years Old',
+            downloadCVBtn: 'Download CV',
+            locationLabel: 'Location',
+            ageLabel: 'Age',
+        },
+        es: {
+            name: 'Nicolás Rubio García',
+            role: 'Analista de Datos',
+            description: 'Soy estudiante de Ciencia Política y Economía, Analista de Datos y apasionado por la programación web. Me encuentro a la espera de mi grado como politólogo, con la mirada puesta en la próxima etapa de mi carrera: una maestría en Ciencia de Datos 🎓. Actualmente, estoy realizando un Bootcamp de Ciencia de Datos e Inteligencia Artificial. Mi objetivo es comprender el mundo a través del análisis e interpretación de los datos integrando la política, la economía y la tecnología. 🌐📊🤖',
+            livesIn: 'Caldas, Colombia',
+            age: '22 Años',
+            downloadCVBtn: 'Descargar CV',
+            locationLabel: 'Ubicación',
+            ageLabel: 'Edad',
+        },
+    };
+      
+    // Cambia el contenido de la sección "About"
+    document.querySelector('.container.py-5 h1').textContent = aboutContent[currentLanguage].name;
+    document.querySelector('.container.py-5 h5').textContent = aboutContent[currentLanguage].role;
+    document.querySelector('.container.py-5 p').style.textAlign = 'justify';
+    document.querySelector('.container.py-5 p').textContent = aboutContent[currentLanguage].description;
+        
+    const locationItems = document.querySelectorAll('.theme-list li');
+    locationItems[0].innerHTML = `<b>${aboutContent[currentLanguage].locationLabel}:</b> ${aboutContent[currentLanguage].livesIn}`;
+    locationItems[1].innerHTML = `<b>${aboutContent[currentLanguage].ageLabel}:</b> ${aboutContent[currentLanguage].age}`;
+    
+    
+    document.querySelector('.container.py-5 button').textContent = aboutContent[currentLanguage].downloadCVBtn;
+    
+    // Define el contenido de las habilidades para ambos idiomas
+    const Skills_Content = {
+        en: {
+            mySkillsHeader: 'My Skills',
+            codingSkillsHeader: 'Coding Skills',
+            analysisSkillsHeader: 'Analysis Skills',
+            webDesign: 'Web Design',
+            researchProjectManagement: 'Research and Project Management',
+            dataAnalysis: 'Data Analysis',
+            appliedEconometrics: 'Applied Econometrics',
+            appliedStatistics: 'Applied Statistics',
+            qualitativeAnalysis: 'Qualitative Analysis',
+        },
+        es: {
+            mySkillsHeader: 'Mis Habilidades',
+            codingSkillsHeader: 'Habilidades de Programación',
+            analysisSkillsHeader: 'Habilidades de Análisis',
+            webDesign: 'Diseño Web',
+            researchProjectManagement: 'Investigación y Gestión de Proyectos',
+            dataAnalysis: 'Análisis de Datos',
+            appliedEconometrics: 'Econometría Aplicada',
+            appliedStatistics: 'Estadística Aplicada',
+            qualitativeAnalysis: 'Análisis Cualitativo',
+        },
+    };
+
+    // Cambia el contenido de la sección "My Skills"
+    document.querySelector('.container.py-5 h1.text-center').textContent = Skills_Content[currentLanguage].mySkillsHeader;
+
+    // Cambia el contenido de la sección "Coding Skills"
+    document.querySelector('.container.py-5 h4').textContent = Skills_Content[currentLanguage].codingSkillsHeader;
+
+    document.querySelectorAll('.progress-wrapper .caption')[0].textContent = 'R';
+    document.querySelectorAll('.progress-wrapper .progress-bar')[0].style.width = '80%';
+
+    document.querySelectorAll('.progress-wrapper .caption')[1].textContent = 'Python';
+    document.querySelectorAll('.progress-wrapper .progress-bar')[1].style.width = '70%';
+
+    document.querySelectorAll('.progress-wrapper .caption')[2].textContent = 'MySQL';
+    document.querySelectorAll('.progress-wrapper .progress-bar')[2].style.width = '80%';
+
+    document.querySelectorAll('.progress-wrapper .caption')[3].textContent = 'Power BI';
+    document.querySelectorAll('.progress-wrapper .progress-bar')[3].style.width = '80%';
+
+    document.querySelectorAll('.progress-wrapper .caption')[4].textContent = Skills_Content[currentLanguage].webDesign;
+    document.querySelectorAll('.progress-wrapper .progress-bar')[4].style.width = '70%';
+
+    // Cambia el contenido de la sección "Analysis Skills"
+    document.querySelectorAll('.container.py-5 h4')[1].textContent = Skills_Content[currentLanguage].analysisSkillsHeader;
+
+    document.querySelectorAll('.progress-wrapper .caption')[5].textContent = Skills_Content[currentLanguage].dataAnalysis;
+    document.querySelectorAll('.progress-wrapper .progress-bar')[5].style.width = '90%';
+
+    document.querySelectorAll('.progress-wrapper .caption')[6].textContent = Skills_Content[currentLanguage].appliedEconometrics;
+    document.querySelectorAll('.progress-wrapper .progress-bar')[6].style.width = '80%';
+
+    document.querySelectorAll('.progress-wrapper .caption')[7].textContent = Skills_Content[currentLanguage].appliedStatistics;
+    document.querySelectorAll('.progress-wrapper .progress-bar')[7].style.width = '80%';
+
+    document.querySelectorAll('.progress-wrapper .caption')[8].textContent = Skills_Content[currentLanguage].qualitativeAnalysis;
+    document.querySelectorAll('.progress-wrapper .progress-bar')[8].style.width = '90%';
+
+    document.querySelectorAll('.progress-wrapper .caption')[9].textContent = Skills_Content[currentLanguage].researchProjectManagement;
+    document.querySelectorAll('.progress-wrapper .progress-bar')[9].style.width = '90%';
+
+    // Define el contenido de la educación
+
+    const educationContent = {
+      en: {
+        timelineHeader: 'Education',
+        timelineItems: [
+          {
+            title: '2019-2023',
+            degree: "Bachelor's Degree in Political Science",
+            university: 'National University of Colombia',
+            description: 'Awaiting my graduation ceremony in April 2024.',
+          },
+          {
+            title: '2021-Present',
+            degree: "Bachelor's Degree in Economics",
+            university: 'National University of Colombia - Universidad El Bosque',
+            description: 'Switched to Universidad El Bosque in 2023.',
+          },
+          {
+            title: '2023',
+            degree: 'Diploma in Applied Statistics',
+            university: 'Colegio de Economistas del Perú - Escuela Nacional de Formación Pública y Empresarial',
+            description: '4 modules: Statistical Methods, Foundations and Applications; Statistical Modeling; Multiple Statistical Methods; Multivariate Statistical Methods.',
+          },
+          {
+            title: '2023',
+            degree: 'Diploma in Applied Econometrics (in progress)',
+            university: 'Colegio de Economistas del Perú - Escuela Nacional de Formación Pública y Empresarial',
+            description: '5 modules: Fundamentals of Econometrics; Microeconometrics; Macroeconometrics; Financial Econometrics; Impact Evaluation (in progress).',
+          },
+          {
+            title: '2022-2023',
+            degree: 'Methods and Statistics in Social Sciences',
+            university: 'University of Amsterdam - Coursera',
+            description: 'Identify interesting questions, analyze data sets, and correctly interpret results to make solid, evidence-based decisions.',
+          },
+          {
+            title: '2022',
+            degree: 'Diploma in Programming Skills with Emphasis on Web Pages',
+            university: 'Universidad de Caldas - Ministerio de las Tecnologías de la Información y las Comunicaciones',
+            description: "I was part of the second cohort of 'MISION TIC 2022'.",
+          },
+          {
+            title: '2023 - Present',
+            degree: 'Data Science and Artificial Intelligence Bootcamp',
+            university: 'Ucamp',
+            description: 'I have earned two badges with the Outstanding distinction: Data Science Fundamentals (100/100) and Data Cleaning and Preprocessing (100/100).',
+          },
+          {
+            title: '2023',
+            degree: 'Data Science and Artificial Intelligence Certificate',
+            university: 'Universidad de Antioquia',
+            description: 'Ability to perform exploratory data analysis and communicate results of data analysis, customer satisfaction analysis, and process optimization.',
+          },
+          {
+            title: '2023',
+            degree: 'Specialization Course in Data Analytics - Specialization Course in Microsoft Excel',
+            university: 'NETZUN - Universidad Privada Peruano Alemana',
+            description: '20 and 28 hours intensity, respectively.',
+          },
+        ],
+      },
+      es: {
+        timelineHeader: 'Educación',
+        timelineItems: [
+          {
+            title: '2019-2023',
+            degree: "Pregrado en Ciencia Política",
+            university: 'Universidad Nacional de Colombia',
+            description: 'En espera de la ceremonia de grados en abril de 2024.',
+          },
+          {
+            title: '2021-Actualidad',
+            degree: "Pregrado en Economía",
+            university: 'Universidad Nacional de Colombia - Universidad El Bosque',
+            description: 'Me cambié a la Universidad El Bosque en 2023.',
+          },
+          {
+            title: '2023',
+            degree: 'Diplomado en Estadística Aplicada',
+            university: 'Colegio de Economistas del Perú - Escuela Nacional de Formación Pública y Empresarial',
+            description: '4 módulos: Métodos Estadísticos, Fundamentos y Aplicaciones; Modelamiento Estadístico; Métodos Estadísticos Múltiples; Métodos Estadísticos Multivariados.',
+          },
+          {
+            title: '2023',
+            degree: 'Diplomado en Econometría Aplicada (en progreso)',
+            university: 'Colegio de Economistas del Perú - Escuela Nacional de Formación Pública y Empresarial',
+            description: '5 módulos: Fundamentos de Econometría; Microeconometría; Macroeconometría; Econometría Financiera; Evaluación de Impacto (en progreso).',
+          },
+          {
+            title: '2022-2023',
+            degree: 'Métodos y Estadísticas en Ciencias Sociales',
+            university: 'Universidad de Ámsterdam - Coursera',
+            description: 'Identificar preguntas interesantes, analizar conjuntos de datos e interpretar correctamente los resultados para tomar decisiones sólidas basadas en evidencia.',
+          },
+          {
+            title: '2022',
+            degree: 'Diplomado en Habilidades de Programación con Énfasis en Páginas Web',
+            university: 'Universidad de Caldas - Ministerio de las Tecnologías de la Información y las Comunicaciones',
+            description: "Fui parte de la segunda cohorte de 'MISIÓN TIC 2022'.",
+          },
+          {
+            title: '2023 - Actualidad',
+            degree: 'Bootcamp en Ciencia de Datos e Inteligencia Artificial',
+            university: 'Ucamp',
+            description: 'He obtenido dos insignias con la distinción Sobresaliente: Fundamentos de Ciencia de Datos (100/100) y Limpieza y Preprocesamiento de Datos (100/100).',
+          },
+          {
+            title: '2023',
+            degree: 'Certificación Ciencia de Datos Inteligencia Artificial',
+            university: 'Universidad de Antioquia',
+            description: 'Capacidad para realizar análisis exploratorio de datos y comunicar resultados del análisis de datos, análisis de la satisfacción del cliente y optimización de procesos.',
+          },
+          {
+            title: '2023',
+            degree: 'Curso de Especialización en Análisis de Datos - Curso de Especialización en Microsoft Excel',
+            university: 'NETZUN - Universidad Privada Peruano Alemana',
+            description: '20 y 28 horas de intensidad, respectivamente.',
+          },
+        ],
+      },
+    };
+    
+    // Cambia el contenido de la sección "Education"
+    document.querySelector('.container.pt-5 h1.text-center').textContent = educationContent[currentLanguage].timelineHeader;
+    
+    const timelineItems = document.querySelectorAll('.timeline li');
+    timelineItems.forEach((item, index) => {
+      const data = educationContent[currentLanguage].timelineItems[index];
+      item.querySelector('.title').textContent = data.title;
+      item.querySelector('.details h5').textContent = data.degree;
+      item.querySelector('.details .fg-theme').textContent = data.university;
+      item.querySelector('.details p').textContent = data.description;
+    });
+
+    const professionalContent = {
+      en: {
+        profileheader: 'Professional Profile',
+        workExperienceHeader: 'Work Experience',
+        academicExperienceHeader: 'Academic Experience',
+        workExperienceItems: [
+        {
+          title: 'December 2023 - Present',
+          details: 'Data Analyst Consultant',
+          organization: 'Corporacion Programa Desarrollo para la Paz del Magdalena Centro',
+          description: 'Assisted in the design and implementation of the Corporation\'s monitoring and evaluation system, coordinated the data cleaning and updating process, and contributed to the development of statistical inputs.',
+        },
+        {
+          title: 'June 2023 - December 2023',
+          details: 'Political Science Intern - Data Analyst',
+          organization: 'Corporacion Programa Desarrollo para la Paz del Magdalena Centro',
+          description: 'Data Analyst and Political Science Intern in the Governance and Governability Area.',
+        },
+        {
+          title: 'March 2023 - Present',
+          details: 'Freelance Data Analyst',
+          organization: 'Corporacion Programa Desarrollo para la Paz del Magdalena Centro',
+          description: 'Specialized in developing research methodologies that encompass the systematic collection, transformation, and rigorous analysis of data.',
+        },
+        {
+          title: 'March 2023 - Present',
+          details: 'Freelance Data Analyst',
+          organization: 'Corporacion Programa Desarrollo para la Paz del Magdalena Centro',
+          description: 'Specialized in developing research methodologies that encompass the systematic collection, transformation, and rigorous analysis of data.',
+        },
+        {
+          title: 'March 2022 - October 2022',
+          details: 'Academic journal editor',
+          organization: 'Comité Organizador de Ciencia Política',
+          description: 'Student group in the Faculty of Humanities and Economic Sciences at the National University of Colombia in Medellín.',
+        },
+        {
+          title: 'April 2020 - December 2020',
+          details: 'Social Sciences teacher',
+          organization: 'Centro Educativo Vida Cevida',
+          description: 'Social Sciences classes.',
+        },
+        {
+          title: 'April 2019 - August 2019',
+          details: 'English teacher',
+          organization: 'Centro Educativo Vida Cevida',
+          description: 'English as a Foreign Language (EFL) classes.',
+        },
+      ],
+      academicExperienceItems: [
+        {
+          title: 'October 2023',
+          details: 'The COVID economy: Political and economic analysis of the Pandemic in Colombia, Brazil, Argentina, and Chile',
+          organization: 'Revista FENADECO, Federación Nacional de Estudiantes de Economía',
+          description: 'Academic publication in an indexed journal published in physical format at the National Congress of Economics Students (CNEE) in October 2023. Awaiting digital publication.',
+        },
+        {
+          title: 'June 2023 - Present',
+          details: 'RegAssure: Streamlined Integration of Regression Assumption',
+          organization: 'The Comprehensive R Archive Network',
+          description: 'RegAssure is a project designed to simplify the assessment of assumptions in various types of regression models in R. Releasing date on CRAN: September 4, 2023. Repository: [Link](https://cran.r-project.org/package=RegAssure).',
+        },
+        {
+          title: 'June 9, 2023',
+          details: 'Speaker on Towards a comprehensive measurement of the healthcare system in Latin America: Introduction of the Multidimensional Performance Index',
+          organization: '7th National Congress of Political Science ACCPOL - Uniandes',
+          description: 'Co-speaker at the University of Los Andes. Certificate: [Link](https://drive.google.com/file/d/1M8wAyujd_EWK-QURbWDGKyOODIIZss1T/view?usp=sharing).',
+        },
+        {
+          title: 'December 2022',
+          details: 'Sowing Seeds: The Situation of the Rights of Children and Adolescents in Caldas. Interview with Luis Eduardo Céspedes',
+          organization: 'Ainkaa. Revista De Estudiantes De Ciencia Política',
+          description: 'Academic publication in an indexed journal available at: [Link](https://www.academia.edu/93958769/Rubio_Garc%C3%ADa_N_2022_Sembrando_semillas_la_situaci%C3%B3n_de_derechos_de_ni%C3%B1as_ni%C3%B1os_y_adolescentes_en_Caldas_Entrevista_a_Luis_Eduardo_C%C3%A9spedes_Ainkaa_Revista_De_Estudiantes_De_Ciencia_Pol%C3%ADtica_6_11_12_).',
+        },
+        {
+          title: 'December 2021',
+          details: 'About paper sheets and factors: historical and political analysis of nineteenth-century liberal project',
+          organization: 'Ainkaa. Revista De Estudiantes De Ciencia Política',
+          description: 'Academic publication in an indexed journal available at: [Link](https://www.academia.edu/78881354/Sobre_hojas_y_factores_an%C3%A1lisis_hist%C3%B3rico_pol%C3%ADtico_del_proyecto_liberal_decimon%C3%B3nico).',
+        },
+      ],
+    },
+    es: {
+      profileheader: 'Perfil Profesional',
+      workExperienceHeader: 'Experiencia Laboral',
+      academicExperienceHeader: 'Experiencia Académica',
+      workExperienceItems: [
+        {
+          title: 'Diciembre 2023 - Actualidad',
+          details: 'Consultor de Análisis de Datos',
+          organization: 'Corporación Programa Desarrollo para la Paz del Magdalena Centro',
+          description: 'Colaboré en el diseño e implementación del sistema de monitoreo y evaluación de la Corporación, coordiné el proceso de limpieza y actualización de datos, y contribuí al desarrollo de insumos estadísticos.',
+        },
+        {
+          title: 'Junio 2023 - Diciembre 2023',
+          details: 'Pasante de Ciencias Políticas - Analista de Datos',
+          organization: 'Corporación Programa Desarrollo para la Paz del Magdalena Centro',
+          description: 'Analista de Datos y Pasante de Ciencias Políticas en el Área de Gobernabilidad.',
+        },
+        {
+          title: 'Marzo 2023 - Actualidad',
+          details: 'Consultor de Análisis de Datos Independiente',
+          organization: 'Corporación Programa Desarrollo para la Paz del Magdalena Centro',
+          description: 'Especializado en el desarrollo de metodologías de investigación que abarcan la recopilación sistemática, transformación y análisis riguroso de datos.',
+        },
+        {
+          title: 'Marzo 2022 - Octubre 2022',
+          details: 'Editor de Revista Académica',
+          organization: 'Comité Organizador de Ciencia Política',
+          description: 'Grupo estudiantil en la Facultad de Humanidades y Ciencias Económicas de la Universidad Nacional de Colombia en Medellín.',
+        },
+        {
+          title: 'Abril 2020 - Diciembre 2020',
+          details: 'Profesor de Ciencias Sociales',
+          organization: 'Centro Educativo Vida Cevida',
+          description: 'Clases de Ciencias Sociales.',
+        },
+        {
+          title: 'Abril 2019 - Agosto 2019',
+          details: 'Profesor de Inglés',
+          organization: 'Centro Educativo Vida Cevida',
+          description: 'Clases de Inglés como Lengua Extranjera (EFL).',
+        },
+      ],
+      academicExperienceItems: [
+        {
+          title: 'Octubre 2023',
+          details: 'La economía del COVID: Análisis político y económico de la pandemia en Colombia, Brasil, Argentina y Chile',
+          organization: 'Revista FENADECO, Federación Nacional de Estudiantes de Economía',
+          description: 'Publicación académica en una revista indexada publicada en formato físico en el Congreso Nacional de Estudiantes de Economía (CNEE) en octubre de 2023. A la espera de publicación digital.',
+        },
+        {
+          title: 'Junio 2023 - Actualidad',
+          details: 'RegAssure: Integración simplificada de suposiciones de regresión',
+          organization: 'The Comprehensive R Archive Network',
+          description: 'RegAssure es un proyecto diseñado para simplificar la evaluación de suposiciones en varios tipos de modelos de regresión en R. Fecha de lanzamiento en CRAN: 4 de septiembre de 2023. Repositorio: [Enlace](https://cran.r-project.org/package=RegAssure).',
+        },
+        {
+          title: '9 de junio de 2023',
+          details: 'Conferencista sobre Hacia una medición integral del sistema de salud en América Latina: Introducción del Índice de Desempeño Multidimensional',
+          organization: '7º Congreso Nacional de Ciencia Política ACCPOL - Uniandes',
+          description: 'Co-conferencista en la Universidad de Los Andes. Certificado: [Enlace](https://drive.google.com/file/d/1M8wAyujd_EWK-QURbWDGKyOODIIZss1T/view?usp=sharing).',
+        },
+        {
+          title: 'Diciembre 2022',
+          details: 'Sembrando Semillas: La situación de los derechos de niños y adolescentes en Caldas. Entrevista con Luis Eduardo Céspedes',
+          organization: 'Ainkaa. Revista De Estudiantes De Ciencia Política',
+          description: 'Publicación académica en una revista indexada disponible en: [Enlace](https://www.academia.edu/93958769/Rubio_Garc%C3%ADa_N_2022_Sembrando_semillas_la_situaci%C3%B3n_de_derechos_de_ni%C3%B1as_ni%C3%B1os_y_adolescentes_en_Caldas_Entrevista_a_Luis_Eduardo_C%C3%A9spedes_Ainkaa_Revista_De_Estudiantes_De_Ciencia_Pol%C3%ADtica_6_11_12_).',
+        },
+        {
+          title: 'Diciembre 2021',
+          details: 'Acerca de hojas de papel y factores: análisis histórico y político del proyecto liberal del siglo XIX',
+          organization: 'Ainkaa. Revista De Estudiantes De Ciencia Política',
+          description: 'Publicación académica en una revista indexada disponible en: [Enlace](https://www.academia.edu/78881354/Sobre_hojas_y_factores_an%C3%A1lisis_hist%C3%B3rico_pol%C3%ADtico_del_proyecto_liberal_decimon%C3%B3nico).',
+        },
+      ],
+    },
+  };
+       
+    // Cambia el contenido de la sección "Profile"
+    document.querySelector('.container.py-5 h1.text-center').textContent = professionalContent[currentLanguage].profileheader;
+
+    // Cambia el contenido de la sección "Work Experience"
+    document.querySelector('.work-experience h4').textContent = professionalContent[currentLanguage].workExperienceHeader;
+
+    // Obtén la lista de elementos de experiencia laboral
+    const workExperienceItems = professionalContent[currentLanguage].workExperienceItems;
+
+    // Itera sobre los elementos de experiencia laboral
+    workExperienceItems.forEach((item, index) => {
+      const workExperienceItem = document.querySelector(`.work-experience li:nth-child(${index + 1})`);
+      if (workExperienceItem) {
+        workExperienceItem.querySelector('.title').textContent = item.title;
+        workExperienceItem.querySelector('.details h5').textContent = item.details;
+        workExperienceItem.querySelector('.details small').textContent = item.organization;
+        workExperienceItem.querySelector('.details p').textContent = item.description;
+      }
+    });
+
+    // Cambia el contenido de la sección "Academic Experience"
+    document.querySelector('.academic-experience h4').textContent = professionalContent[currentLanguage].academicExperienceHeader;
+
+    const academicExperienceItems = professionalContent[currentLanguage].academicExperienceItems;
+
+    academicExperienceItems.forEach((item, index) => {
+      const academicExperienceItem = document.querySelector(`.academic-experience li:nth-child(${index + 1})`);
+      if (academicExperienceItem) {
+        academicExperienceItem.querySelector('.title').textContent = item.title;
+        academicExperienceItem.querySelector('.details h5').textContent = item.details;
+        academicExperienceItem.querySelector('.details small').textContent = item.organization;
+        academicExperienceItem.querySelector('.details p').textContent = item.description;
+      }
+    });
+
+
+        // Define el contenido de la sección "Fun Facts" para ambos idiomas
+    const funFactsContent = {
+        en: {
+        clients: { number: 768, label: 'Clients' },
+        projectsComplete: { number: 230, label: 'Project Completed' },
+        projectsOngoing: { number: 97, label: 'Project Ongoing' },
+        clientSatisfaction: { number: 699, label: 'Client Satisfaction' },
+        },
+        es: {
+        clients: { number: 768, label: 'Clientes' },
+        projectsComplete: { number: 230, label: 'Proyectos Completados' },
+        projectsOngoing: { number: 97, label: 'Proyectos en Curso' },
+        clientSatisfaction: { number: 699, label: 'Satisfacción del Cliente' },
+        },
+    };
+    
+    // Actualiza los números y las etiquetas en la sección "Fun Facts"
+    const funFactsItems = document.querySelectorAll('.vg-page.page-funfact .number');
+    const funFactsLabels = document.querySelectorAll('.vg-page.page-funfact span');
+    funFactsItems.forEach((item, index) => {
+        const factType = Object.values(funFactsContent[currentLanguage])[index];
+        item.textContent = factType.number;
+        funFactsLabels[index].textContent = factType.label;
+    });
+
+    // Define el contenido de la sección de cartera para ambos idiomas
+    const portfolioContent = {
+        en: {
+        badge: 'Portfolio',
+        title: 'See my work',
+        categories: {
+            all: 'All',
+            apps: 'Apps',
+            template: 'Template',
+            ios: 'IOS',
+            'ui-ux': 'UI/UX',
+            graphic: 'Graphic',
+            wireframes: 'Wireframes',
+        },
+        items: [
+            { category: 'apps', type: 'wow zoomIn', title: 'Mobile Travel App', description: 'Travel, Discovery', imgSrc: '../assets/img/work/work-1.jpg' },
+            { category: 'template wireframes', type: 'wow zoomIn', title: 'Music App', description: 'Musics', imgSrc: '../assets/img/work/work-2.jpg' },
+            // ... Agrega más elementos según sea necesario
+        ],
+        loadMoreBtn: 'Load More',
+        },
+        es: {
+        badge: 'Portafolio',
+        title: 'Ve mi trabajo',
+        categories: {
+            all: 'Todos',
+            apps: 'Apps',
+            template: 'Plantilla',
+            ios: 'IOS',
+            'ui-ux': 'UI/UX',
+            graphic: 'Gráfico',
+            wireframes: 'Wireframes',
+        },
+        items: [
+            { category: 'apps', type: 'wow zoomIn', title: 'Mobile Travel App', description: 'Viajes, Descubrimiento', imgSrc: '../assets/img/work/work-1.jpg' },
+            { category: 'template wireframes', type: 'wow zoomIn', title: 'Music App', description: 'Música', imgSrc: '../assets/img/work/work-2.jpg' },
+            // ... Agrega más elementos según sea necesario
+        ],
+        loadMoreBtn: 'Cargar más',
+        },
+    };
+  
+    // Actualiza el contenido de la sección de cartera según el idioma seleccionado
+    const portfolioBadge = document.querySelector('.vg-page.page-portfolio .badge-subhead');
+    const portfolioTitle = document.querySelector('.vg-page.page-portfolio h1');
+    const portfolioButtons = document.querySelectorAll('.vg-page.page-portfolio .filterable-button button');
+    const portfolioItems = document.querySelectorAll('.vg-page.page-portfolio .grid-item');
+    const loadMoreBtn = document.querySelector('.vg-page.page-portfolio .btn.btn-theme');
+    
+    portfolioBadge.textContent = portfolioContent[currentLanguage].badge;
+    portfolioTitle.textContent = portfolioContent[currentLanguage].title;
+    portfolioButtons.forEach((button, index) => {
+        button.textContent = portfolioContent[currentLanguage].categories[button.getAttribute('data-filter')];
+    });
+    portfolioItems.forEach((item, index) => {
+        const itemInfo = portfolioContent[currentLanguage].items[index];
+        item.className = `grid-item ${itemInfo.category} ${itemInfo.type}`;
+        item.innerHTML = `
+        <div class="img-place" data-src="${itemInfo.imgSrc}" data-fancybox data-caption="<h5 class='fg-theme'>${itemInfo.title}</h5> <p>${itemInfo.description}</p>">
+            <img src="${itemInfo.imgSrc}" alt="">
+            <div class="img-caption">
+            <h5 class="fg-theme">${itemInfo.title}</h5>
+            <p>${itemInfo.description}</p>
+            </div>
+        </div>`;
+    });
+    loadMoreBtn.textContent = portfolioContent[currentLanguage].loadMoreBtn;
+
+    // Define el contenido de la sección de testimonios para ambos idiomas
+    const testimonialContent = {
+        en: {
+        title: 'What Clients are Saying',
+        items: [
+            {
+            content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered',
+            imageSrc: '../assets/img/testimonials/testimonials_1.jpg',
+            name: 'Satria Nugraha',
+            details: 'CEO Nutshell',
+            },
+            {
+            content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe natus expedita ab facilis ut, animi explicabo amet. Voluptatibus possimus iste enim, doloremque, fugiat accusamus nisi optio fugit ratione expedita harum?',
+            imageSrc: '../assets/img/testimonials/testimonials_2.jpg',
+            name: 'Selena Arrini',
+            details: 'CEO BigTree',
+            },
+            // ... Agrega más elementos según sea necesario
+        ],
+        },
+        es: {
+        title: 'Lo que dicen los clientes',
+        items: [
+            {
+            content: 'Hay muchas variaciones de pasajes de Lorem Ipsum disponibles, pero la mayoría han sufrido',
+            imageSrc: '../assets/img/testimonials/testimonials_1.jpg',
+            name: 'Satria Nugraha',
+            details: 'CEO Nutshell',
+            },
+            {
+            content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe natus expedita ab facilis ut, animi explicabo amet. Voluptatibus possimus iste enim, doloremque, fugiat accusamus nisi optio fugit ratione expedita harum?',
+            imageSrc: '../assets/img/testimonials/testimonials_2.jpg',
+            name: 'Selena Arrini',
+            details: 'CEO BigTree',
+            },
+            // ... Agrega más elementos según sea necesario
+        ],
+        },
+    };
+  
+    // Actualiza el contenido de la sección de testimonios según el idioma seleccionado
+    const testimonialTitle = document.querySelector('.vg-page.page-testimonial h1');
+    const testimonialItems = document.querySelectorAll('.vg-page.page-testimonial .owl-carousel .item');
+    
+    testimonialTitle.textContent = testimonialContent[currentLanguage].title;
+    testimonialItems.forEach((item, index) => {
+        const itemInfo = testimonialContent[currentLanguage].items[index];
+        item.querySelector('.testi-content').textContent = itemInfo.content;
+        item.querySelector('.img-place img').src = itemInfo.imageSrc;
+        item.querySelector('.thumb-profile img').src = itemInfo.imageSrc;
+        item.querySelector('.tagline h5').textContent = itemInfo.name;
+        item.querySelector('.tagline span').textContent = itemInfo.details;
+    });
+
+    // Define el contenido de la sección de clientes para ambos idiomas
+    const clientContent = {
+        en: [
+        '../assets/img/logo/company_1.svg',
+        '../assets/img/logo/company_2.svg',
+        '../assets/img/logo/company_3.svg',
+        '../assets/img/logo/company_4.svg',
+        '../assets/img/logo/company_5.svg',
+        '../assets/img/logo/company_6.svg',
+        '../assets/img/logo/company_7.svg',
+        '../assets/img/logo/company_8.svg',
+        ],
+        es: [
+        '../assets/img/logo/company_1.svg',
+        '../assets/img/logo/company_2.svg',
+        '../assets/img/logo/company_3.svg',
+        '../assets/img/logo/company_4.svg',
+        '../assets/img/logo/company_5.svg',
+        '../assets/img/logo/company_6.svg',
+        '../assets/img/logo/company_7.svg',
+        '../assets/img/logo/company_8.svg',
+        ],
+    };
+    
+    // Actualiza el contenido de la sección de clientes según el idioma seleccionado
+    const clientItems = document.querySelectorAll('.vg-page.page-client .item');
+    
+    clientItems.forEach((item, index) => {
+        const imgPlace = item.querySelector('.img-place img');
+        imgPlace.src = clientContent[currentLanguage][index];
+    });
+
+    // Define el contenido de la sección de blog para ambos idiomas
+    const blogContent = {
+        en: [
+        { category: 'Technology', title: 'Invision design forward fund', date: 'May 22, 2018', imgSrc: '../assets/img/work/work-9.jpg' },
+        { category: 'Business', title: 'Announcing a plan for small teams', date: 'May 22, 2018', imgSrc: '../assets/img/work/work-6.jpg' },
+        { category: 'Design', title: '5 basic tips for illustrating', date: 'May 22, 2018', imgSrc: '../assets/img/work/work-1.jpg' },
+        ],
+        es: [
+        { category: 'Tecnología', title: 'Fondo de diseño progresivo de Invision', date: '22 de mayo de 2018', imgSrc: '../assets/img/work/work-9.jpg' },
+        { category: 'Negocios', title: 'Anunciando un plan para equipos pequeños', date: '22 de mayo de 2018', imgSrc: '../assets/img/work/work-6.jpg' },
+        { category: 'Diseño', title: '5 consejos básicos para ilustrar', date: '22 de mayo de 2018', imgSrc: '../assets/img/work/work-1.jpg' },
+        ],
+    };
+  
+  // Actualiza el contenido de la sección de blog según el idioma seleccionado
+  const blogItems = document.querySelectorAll('.vg-page.page-blog .post-grid .card');
+  
+  blogItems.forEach((item, index) => {
+    const imgPlace = item.querySelector('.img-place img');
+    const postCategory = item.querySelector('.post-category');
+    const postTitle = item.querySelector('.post-title');
+    const postDate = item.querySelector('.post-date');
+  
+    imgPlace.src = blogContent[currentLanguage][index].imgSrc;
+    postCategory.textContent = blogContent[currentLanguage][index].category;
+    postTitle.textContent = blogContent[currentLanguage][index].title;
+    postDate.textContent = blogContent[currentLanguage][index].date;
+  });
+
+  // Dentro de la función updatePageLanguage()
+
+    // Define el contenido de la sección de contacto para ambos idiomas
+    const contactContent = {
+        en: {
+        badge: 'Contact',
+        title: 'Get in touch',
+        placeholders: {
+            name: 'Your Name',
+            email: 'Email Address',
+            subject: 'Subject',
+            message: 'Enter message here..',
+        },
+        button: 'Send Message',
+        },
+        es: {
+        badge: 'Contacto',
+        title: 'Ponte en contacto',
+        placeholders: {
+            name: 'Tu Nombre',
+            email: 'Correo electrónico',
+            subject: 'Asunto',
+            message: 'Ingresa el mensaje aquí..',
+        },
+        button: 'Enviar Mensaje',
+        },
+    };
+  
+    // Actualiza el contenido de la sección de contacto según el idioma seleccionado
+    const contactSection = document.querySelector('.vg-page.page-contact');
+    const badge = contactSection.querySelector('.badge-subhead');
+    const title = contactSection.querySelector('h1');
+    const formInputs = contactSection.querySelectorAll('.vg-contact-form input, .vg-contact-form textarea');
+    const submitButton = contactSection.querySelector('.vg-contact-form button');
+
+    badge.textContent = contactContent[currentLanguage].badge;
+    title.textContent = contactContent[currentLanguage].title;
+
+    formInputs.forEach(input => {
+    const placeholderKey = input.name.toLowerCase();
+    input.placeholder = contactContent[currentLanguage].placeholders[placeholderKey];
+    });
+
+    submitButton.textContent = contactContent[currentLanguage].button;
+
+    // Define el contenido del pie de página para ambos idiomas
+    const footerContent = {
+        en: {
+        title: 'Virtual Folio',
+        whereToFind: 'Where to find me',
+        address: '1600 Amphitheatre Parkway Mountain View, California 94043 US',
+        followMe: 'Follow me',
+        socialMedia: [
+            { label: 'Instagram', link: '#' },
+            { label: 'Facebook', link: '#' },
+            { label: 'Twitter', link: '#' },
+            { label: 'Youtube', link: '#' },
+        ],
+        contactMe: 'Contact me',
+        contactInfo: [
+            { label: 'info@virtual.com', link: 'mailto:info@virtual.com' },
+            { label: '+8890234', link: 'tel:+8890234' },
+            { label: '+813023', link: 'tel:+813023' },
+        ],
+        subscribeTitle: 'Subscribe',
+        subscribePlaceholder: 'Email address',
+        subscribeButton: 'Subscribe',
+        copyright: 'Copyright &copy;2020. All right reserved | This template is made with <span class="ti-heart fg-theme-red"></span> by <a href="https://www.macodeid.com/">MACode ID</a>',
+        },
+        es: {
+        title: 'Virtual Folio',
+        whereToFind: 'Dónde encontrarme',
+        address: '1600 Amphitheatre Parkway Mountain View, California 94043 US',
+        followMe: 'Sígueme',
+        socialMedia: [
+            { label: 'Instagram', link: '#' },
+            { label: 'Facebook', link: '#' },
+            { label: 'Twitter', link: '#' },
+            { label: 'Youtube', link: '#' },
+        ],
+        contactMe: 'Contáctame',
+        contactInfo: [
+            { label: 'info@virtual.com', link: 'mailto:info@virtual.com' },
+            { label: '+8890234', link: 'tel:+8890234' },
+            { label: '+813023', link: 'tel:+813023' },
+        ],
+        subscribeTitle: 'Suscribirse',
+        subscribePlaceholder: 'Dirección de correo electrónico',
+        subscribeButton: 'Suscribirse',
+        copyright: 'Copyright &copy;2020. Todos los derechos reservados | Esta plantilla está hecha con <span class="ti-heart fg-theme-red"></span> por <a href="https://www.macodeid.com/">MACode ID</a>',
+        },
+    };
+  
+    // Actualiza el contenido del pie de página según el idioma seleccionado
+    const footer = document.querySelector('.vg-footer');
+    const fot_title = footer.querySelector('h1');
+    const whereToFind = footer.querySelector('.footer-info p');
+    const address = footer.querySelector('.footer-info .fs-large');
+    const followMe = footer.querySelector('.float-lg-right p:nth-of-type(1)');
+    const socialMediaLinks = footer.querySelectorAll('.float-lg-right ul.list-unstyled li a');
+    const contactMe = footer.querySelector('.float-lg-right p:nth-of-type(2)');
+    const contactInfoItems = footer.querySelectorAll('.float-lg-right ul.list-unstyled:last-of-type li');
+    const subscribeTitle = footer.querySelector('.mb-3 h3');
+    const subscribeInput = footer.querySelector('.mb-3 form .form-control');
+    const subscribeButton = footer.querySelector('.mb-3 form .btn-theme');
+    const copyright = footer.querySelector('.text-center.mb-0');
+
+    title.textContent = footerContent[currentLanguage].title;
+    whereToFind.textContent = footerContent[currentLanguage].whereToFind;
+    address.textContent = footerContent[currentLanguage].address;
+    followMe.textContent = footerContent[currentLanguage].followMe;
+
+    socialMediaLinks.forEach((link, index) => {
+    link.textContent = footerContent[currentLanguage].socialMedia[index].label;
+    link.href = footerContent[currentLanguage].socialMedia[index].link;
+    });
+
+    contactMe.textContent = footerContent[currentLanguage].contactMe;
+
+    contactInfoItems.forEach((item, index) => {
+    item.textContent = footerContent[currentLanguage].contactInfo[index].label;
+    item.href = footerContent[currentLanguage].contactInfo[index].link;
+    });
+
+    subscribeTitle.textContent = footerContent[currentLanguage].subscribeTitle;
+    subscribeInput.placeholder = footerContent[currentLanguage].subscribePlaceholder;
+    subscribeButton.textContent = footerContent[currentLanguage].subscribeButton;
+    copyright.innerHTML = footerContent[currentLanguage].copyright;
+    
+    // Cambia el texto del botón de cambio de idioma
+    document.getElementById('changeLanguageBtn').textContent = currentNavbarContent.languageBtn;
+}
